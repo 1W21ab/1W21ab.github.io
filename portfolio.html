@@ -136,11 +136,11 @@
     <!-- Resume Container -->
     <div id="resume" class="md hidden p-6 max-w-3xl mx-auto shadow-md text-black">
     <!-- your resume content -->
-</div>
+
 
 
         <img id="profileImage" src="img/3.jpeg" width="200" class="mb-3 mx-auto rounded">
-
+         </div>
 
         <h2 class="text-center text-3xl font-bold mb-1">Ana Marie Frio</h2>
 
@@ -186,33 +186,39 @@
         <h2 class="text-2xl font-semibold mb-2">Skills</h2>
         <p>HTML, CSS, JavaScript, React, Tailwind CSS</p>
     </div>
+   
 
     <button onclick="downloadResumePDF()" class="p-2 bg-blue-600 text-white rounded">
     Download Resume
 </button>
 
 
-    <!-- Script for PDF -->
-    <script>
-        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
-            const resume = document.getElementById('resume');
+ <script>
+document.getElementById("downloadPdfBtn").addEventListener("click", function () {
+    const resume = document.getElementById("resume");
 
-            const opt = {
-                margin: 0,
-                filename: 'AnaMarie.pdf',
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: { 
-                    scale: 3,     // clearer text
-                    useCORS: true,
-                    letterRendering: true,
-                    windowWidth: 1200
-                },
-                jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
-            };
+    const opt = {
+        margin: 0,
+        filename: 'AnaMarie.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { 
+            scale: 3,           // clear PDF
+            useCORS: true,
+            letterRendering: true,
+            windowWidth: 1200
+        },
+        jsPDF: { 
+            unit: 'pt', 
+            format: 'a4', 
+            orientation: 'portrait' 
+        }
+    };
 
-            html2pdf().set(opt).from(resume).save();
-        });
-    </script>
+    html2pdf().set(opt).from(resume).save();
+});
+</script>
+
+
 
 </body>
 </html>
