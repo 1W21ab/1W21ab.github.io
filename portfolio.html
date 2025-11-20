@@ -135,6 +135,9 @@
 
     <!-- Resume Container -->
     <div id="resume" class="md hidden p-6 max-w-3xl mx-auto shadow-md text-black">
+    <!-- your resume content -->
+</div>
+
 
         <img id="profileImage" src="img/3.jpeg" width="200" class="mb-3 mx-auto rounded">
 
@@ -184,12 +187,10 @@
         <p>HTML, CSS, JavaScript, React, Tailwind CSS</p>
     </div>
 
-    <!-- Download Button -->
-    <div class="text-center mt-6">
-        <button id="downloadPdfBtn" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-            Download Resume
-        </button>
-    </div>
+    <button onclick="downloadResumePDF()" class="p-2 bg-blue-600 text-white rounded">
+    Download Resume
+</button>
+
 
     <!-- Script for PDF -->
     <script>
