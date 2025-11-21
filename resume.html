@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Resume</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Marie Resume</title>
 
-    <!-- Tailwind CSS optional -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- html2canvas + jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<!-- html2pdf.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
-
 <body class="bg-gray-100">
 
-    <div id="resume" class="a4  p-6 max-w-3xl mx-auto shadow-md text-black bg-white">
+<div id="resume" class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded shadow">
 
-        <img id="profileImage" src="img/3.jpeg" width="200" class="mb-3 mx-auto rounded">
-
-
+    <!-- Profile Section -->
+    <div class="text-center mb-6">
+        <!-- Use an absolute URL or local image with crossorigin="anonymous" -->
+        <img src="img/3.jpeg" alt="Profile Photo" class="mx-auto rounded-full w-40 h-40 mb-4" crossorigin="anonymous">
+        <div id="resume" class="a4  p-6 max-w-3xl mx-auto shadow-md text-black bg-white">
         <h2 class="text-center text-3xl font-bold mb-1">Ana Marie Frio</h2>
-
         <div class="text-center mb-4">
             <p>Contact: 09538503551</p>
             <p>Email: frioanamarie13@gmail.com</p>
         </div>
-
         <hr>
         <h3 class="text-lg font-semibold mt-4">PERSONAL INFORMATION</h3>
         <hr>
@@ -65,25 +62,50 @@
         <h2 class="text-2xl font-semibold mb-2">Skills</h2>
         <p>HTML, CSS, JavaScript, React, Tailwind CSS</p>
     </div>
-    <script>
-    document.getElementById("downloadBtn").addEventListener("click", async () => {
-        const { jsPDF } = window.jspdf;
 
-        // Take a screenshot of the resume div
-        const resumeElement = document.getElementById("resume");
-        const canvas = await html2canvas(resumeElement, { scale: 2 });
-        const imgData = canvas.toDataURL("image/png");
 
-        // Create PDF
-        const pdf = new jsPDF("p", "mm", "a4");
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    <hr class="my-4">
 
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    <!-- Skills -->
+    <section class="mb-4">
+        <h2 class="text-2xl font-semibold mb-2">Skills</h2>
+        <p>HTML, CSS, JavaScript, React, Tailwind CSS</p>
+    </section>
 
-        // Save PDF (your new file name)
-        pdf.save("AnaMarie.pdf");
-    });
+    <hr class="my-4">
+
+    <!-- References -->
+    <section class="mb-4">
+        <h2 class="text-2xl font-semibold mb-2">References</h2>
+        <ul class="list-disc list-inside">
+            <li>Name: Ana Marie Frio</li>
+            <li>Agency: DCCP</li>
+            <li>Contact Number: 09538503551</li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- Download Button -->
+<div class="text-center mt-6">
+    <button id="downloadBtn" class="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all">
+        Download Resume
+    </button>
+</div>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    const resume = document.getElementById('resume');
+
+    // PDF options
+    html2pdf().set({
+        margin: 10,
+        filename: 'AnaMarie.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true, logging: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(resume).save();
+});
 </script>
 
 </body>
