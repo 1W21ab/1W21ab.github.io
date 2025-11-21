@@ -1,83 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyResume</title>
-        <style>
-            body{
-                background-color:rgb(212, 184, 189);
-            }
-            img{
-                display: block;
-                margin: 0 auto;
-                border-radius: 8px;
-                object-fit: cover;
-                max-width: 200px;
-                height: auto;
-            }
-            div{
-                color:black;
-                text-align: center;
-                font-family: calibri;
-            }
-              strong{
-                color:black;
-                text-align: center;
-                font-family: bold calibri;
-            }
-             span{
-                color:black;
-                text-align: justify;
-                font-family: calibri;
-            }
-            p{
-                color: rgb(30, 29, 29);
-                text-align: justify;
-            }
-        </style>
-        </head>
-        <body>
-            <a href="index.html">Home</a>
-            <img src="img/2.jpg" alt="Profile Photo" width="413" height="531" style="border-radius: 8px; object-fit: cover;">
-            <div class= "Name">
-                <strong>Ana Marie Frio</strong>
-            </div>
-             <div class= "Contact Number">
-                <span class="CONTACT">09538503551</span><br>
-                <span class="Email">frioanamarie13@gmail.com</span><br>
-            </div>
-            
-            <hr>
-            <h3> PERSONAL INFORMATION</h3>
-            <hr>
-            <p> Complete Name: Ana Marie Frio</p>
-            <p>Birthdate: December 13, 2003</p>
-            <p>Address: Patucannay Bangued Abra</p>
-            
-            <hr>
-            <h3>Educational Background</h3>
-            <hr>
-            <p>Primary School: Patucannay Elementary School</p>
-            <p>Year Graduated: 2015-2016 </p>
-            <p>Secondary School: Abra High School </p>
-            <p>Year Graduated: 2022-2023</p>
-             <p>Tertary School: Data Center College of Bangued</p>
-              <p>Course: Bachelor of Science Information System </p>
-               <p>Year: Third Year</p>
-               <hr>
-               <h3>References</h3>
-               <hr>
-               <p> Name: </p>
-                <p>Agency: </p>
-                <p>Contact Number:</p>
-                <hr>
-               <h3>References</h3>
-               <hr>
-               <p> Name: </p>
-                <p>Agency: </p>
-                <p>Contact Number:</p>
-        </body>
-    </title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Resume</title>
+
+    <!-- Tailwind CSS optional -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- html2canvas + jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+    <div id="resume" class="a4  p-6 max-w-3xl mx-auto shadow-md text-black bg-white">
+
+        <img id="profileImage" src="img/3.jpeg" width="200" class="mb-3 mx-auto rounded">
+
+
+        <h2 class="text-center text-3xl font-bold mb-1">Ana Marie Frio</h2>
+
+        <div class="text-center mb-4">
+            <p>Contact: 09538503551</p>
+            <p>Email: frioanamarie13@gmail.com</p>
+        </div>
+
+        <hr>
+        <h3 class="text-lg font-semibold mt-4">PERSONAL INFORMATION</h3>
+        <hr>
+
+        <p>Complete Name: Ana Marie Frio</p>
+        <p>Birthdate: December 13, 2003</p>
+        <p>Address: Patucannay Bangued Abra</p>
+
+        <hr>
+        <h3 class="text-lg font-semibold mt-4">EDUCATIONAL BACKGROUND</h3>
+        <hr>
+
+        <p>Primary School: Patucannay Elementary School (2015-2016)</p>
+        <p>Secondary School: Abra High School (2022-2023)</p>
+        <p>Tertiary School: Data Center College of Bangued</p>
+        <p>Course: Bachelor of Science Information System</p>
+        <p>Year: Fourth Year</p>
+
+        <hr>
+        <h3 class="text-lg font-semibold mt-4">REFERENCES</h3>
+        <hr>
+
+        <p>Name: Ana Marie Frio</p>
+        <p>Agency: DCCP </p>
+        <p>Contact Number: 09538503551 </p>
+
+        <hr class="my-4">
+        <h2 class="text-2xl font-semibold mb-2">Experience</h2>
+
+        <ul class="list-disc ml-5 mb-4">
+            <li>Cash receipt checker</li>
+            <li>Intern at DEPED ABRA</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mb-2">Skills</h2>
+        <p>HTML, CSS, JavaScript, React, Tailwind CSS</p>
+    </div>
+    <script>
+    document.getElementById("downloadBtn").addEventListener("click", async () => {
+        const { jsPDF } = window.jspdf;
+
+        // Take a screenshot of the resume div
+        const resumeElement = document.getElementById("resume");
+        const canvas = await html2canvas(resumeElement, { scale: 2 });
+        const imgData = canvas.toDataURL("image/png");
+
+        // Create PDF
+        const pdf = new jsPDF("p", "mm", "a4");
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+        // Save PDF (your new file name)
+        pdf.save("AnaMarie.pdf");
+    });
+</script>
+
+</body>
 </html>
